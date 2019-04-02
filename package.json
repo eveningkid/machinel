@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "libsvm-js": "^0.2.1",
     "ml-kmeans": "^4.2.1",
     "ml-naivebayes": "^3.0.0",
     "numjs": "^0.16.0"

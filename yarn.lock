@@ -367,6 +367,11 @@ lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
 
+libsvm-js@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry-npm.corp.gandi.net/libsvm-js/-/libsvm-js-0.2.1.tgz#607a0b073fb0a635546ca5b93b7205282051a877"
+  integrity sha512-tN9gh91NCAwSIhjgG3y8pdKETTwnwFvvSFNIrQQuJGVtAu0SO6Y43D7OEKMSVhQLQkgLADlDaqo9uxNGVEzJEA==
+
 lodash@^4.11.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
