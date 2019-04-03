@@ -13,7 +13,7 @@ function makeClassification({
   nFeatures = 20,
   nClasses = 2,
   randomState = null
-}) {
+} = {}) {
   const X = [];
   const y = [];
 

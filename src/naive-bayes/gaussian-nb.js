@@ -1,11 +1,5 @@
 const MLNaiveBayes = require('ml-naivebayes');
-
-function accuracyScore(predictions, y) {
-  const correctPredictionsCount = predictions.filter((prediction, i) => {
-    return y[i] === prediction;
-  });
-  return correctPredictionsCount / y.length;
-}
+const { accuracyScore } = require('../metrics');
 
 class GaussianNB {
   constructor() {
