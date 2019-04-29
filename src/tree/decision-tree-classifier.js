@@ -12,6 +12,7 @@ class DecisionTreeClassifier {
       criterion,
       maxDepth,
       minSamples,
+      splitter,
     };
 
     // http://mljs.github.io/decision-tree-cart/#constructor

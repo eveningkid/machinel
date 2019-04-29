@@ -1,5 +1,5 @@
 const { naiveBayes } = require('../../src');
-const {MultinomialNB } = naiveBayes;
+const { MultinomialNB } = naiveBayes;
 
 const XTrain = [[1], [2], [3]];
 const yTrain = [0, 0, 1];

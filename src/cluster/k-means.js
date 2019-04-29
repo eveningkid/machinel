@@ -1,7 +1,8 @@
 const MLKMeans = require('ml-kmeans');
 
 class KMeans {
-  constructor({ nClusters, randomState = Math.ceil(Math.random() * 999) }) {
+  // TODO add nClusters default
+  constructor({ nClusters, randomState = Math.ceil(Math.random() * 999) } = {}) {
     this.model = null;
     this.nClusters = nClusters;
     this.randomState = randomState;

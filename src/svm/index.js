@@ -4,6 +4,6 @@ module.exports = {
   // // NuSVC: require('nu-svc'),
   // // NuSVR: require('nu-svr'),
   // // OneClassSVM: require('one-class-svm'),
-  // SVC: require('./svc'),
+  SVC: require('./svc'),
   // SVR: require('./svr'),
 };
