@@ -1,7 +1,7 @@
 {
   "name": "machinel",
   "description": "Simple Machine learning API for JavaScript (SKlearn-like API)",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./dist/bundle.js",
   "license": "MIT",
   "author": {
