@@ -1,59 +1,44 @@
 const KNN = require('ml-knn');
+const Base = require('../base');
 const { accuracyScore } = require('../metrics');
 
-class KNeighborsClassifier {
+class KNeighborsClassifier extends Base {
   constructor({
     nNeighbors = 5,
   } = {}) {
+    super();
     this.knn = null;
-    this.options = {
+    this.params = {
       nNeighbors,
     };
   }
 
-  // Fit the model using X as training data and y as target values
   fit(X, y) {
-    this.knn = new KNN(X, y, this.options);
+    this.knn = new KNN(X, y, this.params);
     return this;
   }
 
-  // Get parameters for this estimator.
-  getParams(deep = true) {
-    return this.options;
+  // TODO
+  __kneighbors(X, nNeighbors, returnDistance) {
   }
 
-  // Finds the K-neighbors of a point.
-  kneighbors(X, nNeighbors, returnDistance) {
-
+  // TODO
+  __kneighborsGraph(X, nNeighbors, mode) {
   }
 
-  // Computes the (weighted) graph of k-Neighbors for points in X
-  kneighborsGraph(X, nNeighbors, mode) {
-
-  }
-
-  // Predict the class labels for the provided data
   predict(X) {
     return this.knn.predict(X);
   }
 
-  // Return probability estimates for the test data X.
-  predictProba(X) {
+  // TODO
+  __predictProba(X) {
     // TODO
-    // Need to PR ml-knn adding predictProba so it returns an array with
+    // predictProba so it returns an array with
     // probability for each class given a sample
-    // First fork it and PR
   }
 
-  // Returns the mean accuracy on the given test data and labels.
-  score(X, y, sampleWeight) {
+  score(X, y) {
     return accuracyScore(this.predict(X), y);
-  }
-
-  // Set the parameters of this estimator.
-  setParams(params = {}) {
-    this.options = { ...this.options, params };
-    return this;
   }
 }
 

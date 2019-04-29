@@ -1,22 +1,21 @@
 const MLNaiveBayes = require('ml-naivebayes');
+const Base = require('../base');
 const { accuracyScore } = require('../metrics');
 
-class GaussianNB {
+class GaussianNB extends Base {
   constructor() {
+    super();
     this.model = new MLNaiveBayes.GaussianNB();
+    this.params = {};
   }
 
-  fit(X, y, sampleWeight = null) {
+  fit(X, y) {
     this.model.train(X, y);
     return this;
   }
 
   // TODO
-  getParams(deep = true) {
-  }
-
-  // TODO
-  partialFit(X, y, classes, sampleWeight = null) {
+  __partialFit(X, y, classes) {
   }
 
   predict(X) {
@@ -24,19 +23,15 @@ class GaussianNB {
   }
 
   // TODO
-  predictLogProba(X) {
+  __predictLogProba(X) {
   }
 
   // TODO
-  predictProba(X) {
+  __predictProba(X) {
   }
 
-  score(X, y, sampleWeight = null) {
+  score(X, y) {
     return accuracyScore(this.predict(X), y);
-  }
-
-  setParams(params = {}) {
-    return this;
   }
 }
 

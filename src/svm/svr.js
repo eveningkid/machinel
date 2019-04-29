@@ -1,72 +1,59 @@
 const SVM = require('libsvm-js/asm');
+const Base = require('../base');
+const { accuracyScore } = require('../metrics');
 
-class SVR {
+class SVR extends Base {
   constructor({
-    // classWeight = null => options.weight (object)
-    C = 1.0,
+    kernel = 'rbf',
     gamma = 'auto',
-    tol = 0.0001,
+    coef0 = 0.0,
+    tol = 0.001,
+    C = 1.0,
     epsilon = 0.1,
   } = {}) {
+    super();
     this.model = new SVM({
       type: SVM.SVM_TYPES.EPSILON_SVR,
+      kernel: SVM.KERNEL_TYPES[kernel.toUpperCase()],
       cost: C,
+      coef0,
+      epsilon,
       epsilon,
       quiet: true,
     });
     this.gamma = gamma;
+    this.params = {
+      kernel,
+      gamma,
+      coef0,
+      tol,
+      C,
+      epsilon,
+    };
   }
 
-  // Predict confidence scores for samples.
-  decisionFunction(X) {
-
+  // TODO 
+  __decisionFunction(X) {
   }
   
-  // Convert coefficient matrix to dense array format.
-  densify() {
-
+  // TODO
+  __densify() {
   }	
   
-  // Fit the model according to the given training data.
-  fit(X, y, sampleWeight = null) {
-    if (this.gamma === 'scale') {
-      // TODO
-      // this.model.options.gamma = 1 / (X[0].length * X.var());
-      
-      // function variance(array) {
-      //   const mean = a.mean(); // TODO
-      //   array = array.map((n) => Math.pow(n - mean, 2));
-      //   array = array.reduce((a, b) => a + b, 0);
-      //   return array / array.length;  
-      // }
-    }
-
+  fit(X, y) {
     this.model.train(X, y);
   }
-
-  // Get parameters for this estimator.
-  getParams(deep = true) {
-
-  }
-
-  // Predict class labels for samples in X.
+  
   predict(X) {
-    // console.log(this.model._getInterval());
     return this.model.predict(X);
   }
 
-  // Returns the mean accuracy on the given test data and labels.
-  score(X, y, sampleWeight = null) {
-  }
-
-  // Set the parameters of this estimator.
-  setParams(params = {}) {
-
+  score(X, y) {
+    return accuracyScore(this.predict(X), y);
   }
   
-  // Convert coefficient matrix to sparse format.
-  sparsify() {
-
+  // TODO
+  __sparsify() {
   }
 }
 

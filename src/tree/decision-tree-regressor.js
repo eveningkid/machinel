@@ -1,6 +1,6 @@
+const Base = require('../base');
 
-class DecisionTreeRegressor {
-  
+class DecisionTreeRegressor extends Base {
 }
 
 module.exports = DecisionTreeRegressor;

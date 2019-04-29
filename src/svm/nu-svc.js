@@ -2,31 +2,32 @@ const SVM = require('libsvm-js/asm');
 const Base = require('../base');
 const { accuracyScore } = require('../metrics');
 
-class LinearSVC extends Base {
+class NuSVC extends Base {
   constructor({
-    tol = 0.0001,
-    C = 1.0,
+    nu = 0.5,
+    kernel = 'rbf',
+    coef0 = 0.0,
+    tol = 0.001,
   } = {}) {
     super();
     this.model = new SVM({
-      kernel: SVM.KERNEL_TYPES.LINEAR,
+      nu,
+      coef0,
+      kernel: SVM.KERNEL_TYPES[kernel.toUpperCase()],
       tolerance: tol,
-      cost: C,
       quiet: true,
     });
     this.params = {
+      nu,
+      kernel,
+      coef0,
       tol,
-      C,
     };
   }
 
   // TODO
   __decisionFunction(X) {
   }
-  
-  // TODO
-  __densify() {
-  }	
   
   fit(X, y) {
     this.model.train(X, y);
@@ -39,10 +40,6 @@ class LinearSVC extends Base {
   score(X, y) {
     return accuracyScore(this.predict(X), y);
   }
-  
-  // TODO
-  __sparsify() {
-  }
 }
 
-module.exports = LinearSVC;
+module.exports = NuSVC;

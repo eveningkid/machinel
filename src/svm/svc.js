@@ -1,61 +1,57 @@
 const SVM = require('libsvm-js/asm');
+const Base = require('../base');
+const { accuracyScore } = require('../metrics');
 
-class SVC {
+class SVC extends Base {
   constructor({
-    // classWeight = null => options.weight (object)
     C = 1.0,
-    tol = 0.0001,
+    kernel = 'rbf',
     gamma = 'auto',
+    coef0 = 0.0,
   } = {}) {
+    super();
     this.model = new SVM({
       cost: C,
+      kernel: SVM.KERNEL_TYPES[kernel.toUpperCase()],
       tolerance: tol,
       quiet: true,
+      coef0,
     });
 
     if (gamma !== 'auto') {
       this.model.options.gamma = gamma;
     }
+
+    this.params = {
+      C,
+      kernel,
+      gamma,
+      coef0,
+    };
   }
 
-  // Predict confidence scores for samples.
-  decisionFunction(X) {
-
+  // TODO
+  __decisionFunction(X) {
   }
   
-  // Convert coefficient matrix to dense array format.
-  densify() {
-
+  // TODO
+  __densify() {
   }	
   
-  // Fit the model according to the given training data.
-  fit(X, y, sampleWeight = null) {
+  fit(X, y) {
     this.model.train(X, y);
   }
 
-  // Get parameters for this estimator.
-  getParams(deep = true) {
-
-  }
-
-  // Predict class labels for samples in X.
   predict(X) {
-    // console.log(this.model._getInterval());
     return this.model.predict(X);
   }
 
-  // Returns the mean accuracy on the given test data and labels.
-  score(X, y, sampleWeight = null) {
-  }
-
-  // Set the parameters of this estimator.
-  setParams(params = {}) {
-
+  score(X, y) {
+    return accuracyScore(this.predict(X), y);
   }
   
-  // Convert coefficient matrix to sparse format.
-  sparsify() {
-
+  // TODO
+  __sparsify() {
   }
 }
 

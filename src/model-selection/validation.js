@@ -20,8 +20,9 @@ function crossValScore(estimator, X, y, { cv = 3 } = {}) {
     }
   }
 
-  const confusionMatrix = crossValidation.kFold(WrappedEstimator, X, y, {}, cv);
-  return confusionMatrix.getAccuracy();
+  return crossValidation
+    .kFold(WrappedEstimator, X, y, {}, cv)
+    .getAccuracy();
 }
 
 module.exports = {

@@ -1,74 +1,56 @@
 const { DecisionTreeClassifier: MLDecisionTreeClassifier } = require('ml-cart');
+const Base = require('../base');
 const { accuracyScore } = require('../metrics');
 
-class DecisionTreeClassifier {
+class DecisionTreeClassifier extends Base {
   constructor({
     criterion = 'gini',
     maxDepth = Infinity,
     minSamples = 2,
     splitter = 'mean',
   } = {}) {
-    this.options = {
+    super();
+    this.classifier = new MLDecisionTreeClassifier({
+      gainFunction: criterion,
+      splitFunction: splitter,
+      minNumSamples: minSamples,
+      maxDepth: maxDepth,
+    });
+    this.params = {
       criterion,
       maxDepth,
       minSamples,
       splitter,
     };
-
-    // http://mljs.github.io/decision-tree-cart/#constructor
-    this.classifier = new MLDecisionTreeClassifier({
-      gainFunction: this.options.criterion,
-      splitFunction: this.options.splitter,
-      minNumSamples: this.options.minSamples,
-      maxDepth: this.options.maxDepth,
-    });
   }
 
-  // Returns the index of the leaf that each sample is predicted as.
-  apply(X, checkInput) {
-
+  // TODO
+  __apply(X, checkInput) {
   }
 
-  // Return the decision path in the tree
-  decisionPath(X, checkInput) {
-
+  // TODO
+  __decisionPath(X, checkInput) {
   }
 
-  // Build a decision tree classifier from the training set (X, y).
-  fit(X, y, sampleWeight, checkInput) {
+  fit(X, y) {
     this.classifier.train(X, y);
     return this;
   }
 
-  // Get parameters for this estimator.
-  getParams(deep = true) {
-    return this.options;
-  }
-
-  // Predict class or regression value for X.
-  predict(X, checkInput) {
+  predict(X) {
     return this.classifier.predict(X);
   }
 
-  // Predict class log-probabilities of the input samples X.
-  predictLogProba(X) {
-
+  // TODO
+  __predictLogProba(X) {
   }
 
-  // Predict class probabilities of the input samples X.
-  predictProba(X, checkInput) {
-
+  // TODO
+  __predictProba(X, checkInput) {
   }
 
-  // Returns the mean accuracy on the given test data and labels.
   score(X, y, sampleWeight) {
     return accuracyScore(this.predict(X), y);
-  }
-
-  // Set the parameters of this estimator.
-  setParams(params = {}) {
-    this.options = { ...this.options, params };
-    return this;
   }
 }
 
