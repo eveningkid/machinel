@@ -1,10 +1,23 @@
-function loadIris(returnXy = false) {
+import { FeaturesArray, LabelsArray } from '../types';
+
+type DataIrisDataset = Array<FeaturesArray | LabelsArray>;
+
+interface FullIrisDataset {
+  // TODO
+  data: any,
+  target: any,
+  featureNames: Array<string>
+}
+
+type IrisDataset = FullIrisDataset | DataIrisDataset;
+
+export function loadIris(returnXy = false): IrisDataset {
   const iris = require('ml-dataset-iris');
   const data = iris.getNumbers();
   let target = iris.getClasses();
   const features = iris.getDistinctClasses();
 
-  const featuresMapping = {};
+  const featuresMapping: any = {};
   for (let i = 0; i < features.length; i++) {
     featuresMapping[features[i]] = i;
   }
@@ -28,7 +41,3 @@ function loadIris(returnXy = false) {
     ],
   };
 }
-
-module.exports = {
-  loadIris,
-};

@@ -1,5 +1,9 @@
+import { FeaturesArray, LabelsArray } from '../types';
+
+type Seed = any;
+
 let randomIteration = 0;
-function random(n = 1, seed = null) {
+function random(n = 1, seed: Seed = null) {
   if (typeof seed !== "undefined") {
     randomIteration++;
     return randomIteration % n;
@@ -8,12 +12,19 @@ function random(n = 1, seed = null) {
   return Math.floor(Math.random() * n);
 }
 
-function makeClassification({
+interface MakeClassificationOptions {
+  nSamples?: number,
+  nFeatures?: number,
+  nClasses?: number,
+  randomState?: number
+}
+
+export function makeClassification({
   nSamples = 100,
   nFeatures = 20,
   nClasses = 2,
   randomState = null
-} = {}) {
+}: MakeClassificationOptions = {}): Array<FeaturesArray | LabelsArray> {
   const X = [];
   const y = [];
 
@@ -29,7 +40,3 @@ function makeClassification({
   
   return [X, y];
 }
-
-module.exports = {
-  makeClassification,
-};

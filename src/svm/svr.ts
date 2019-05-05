@@ -1,8 +1,12 @@
-const SVM = require('libsvm-js/asm');
-const Base = require('../base');
-const { accuracyScore } = require('../metrics');
+import SVM from 'libsvm-js/asm';
+import Base from '../base';
+import { accuracyScore } from '../metrics';
+import { FeaturesArray, LabelsArray } from '../types';
 
-class SVR extends Base {
+export default class SVR extends Base {
+  model: any;
+  gamma: string | number;
+  
   constructor({
     kernel = 'rbf',
     gamma = 'auto',
@@ -18,7 +22,6 @@ class SVR extends Base {
       cost: C,
       coef0,
       epsilon,
-      epsilon,
       quiet: true,
     });
     this.gamma = gamma;
@@ -33,22 +36,23 @@ class SVR extends Base {
   }
 
   // TODO 
-  __decisionFunction(X) {
+  __decisionFunction(X: FeaturesArray) {
   }
   
   // TODO
   __densify() {
   }	
   
-  fit(X, y) {
+  fit(X: FeaturesArray, y: LabelsArray) {
     this.model.train(X, y);
+    return this;
   }
   
-  predict(X) {
+  predict(X: FeaturesArray): LabelsArray {
     return this.model.predict(X);
   }
 
-  score(X, y) {
+  score(X: FeaturesArray, y: LabelsArray): number {
     return accuracyScore(this.predict(X), y);
   }
   
@@ -56,5 +60,3 @@ class SVR extends Base {
   __sparsify() {
   }
 }
-
-module.exports = SVR;

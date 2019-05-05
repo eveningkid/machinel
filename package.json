@@ -2,7 +2,9 @@
   "name": "machinel",
   "description": "Simple Machine learning API for JavaScript (SKlearn-like API)",
   "version": "1.0.2",
-  "main": "./dist/bundle.js",
+  "main": "./dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "./dist/index.d.ts",
   "license": "MIT",
   "author": {
     "name": "Arnaud Dellinger",
@@ -15,6 +17,7 @@
     "ml",
     "sklearn"
   ],
+  "files": ["dist"],
   "scripts": {
     "build": "rollup -c"
   },
@@ -37,6 +40,8 @@
     "rollup-plugin-cjs-es": "^0.7.0",
     "rollup-plugin-commonjs": "^9.3.0",
     "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "^4.0.1"
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-typescript2": "^0.21.0",
+    "typescript": "^3.4.5"
   }
 }

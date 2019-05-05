@@ -1,7 +1,10 @@
-const SVM = require('libsvm-js/asm');
-const Base = require('../base');
+import SVM from 'libsvm-js/asm';
+import Base from '../base';
+import { FeaturesArray, LabelsArray } from '../types';
 
-class LinearSVR extends Base {
+export default class LinearSVR extends Base {
+  model: any;
+  
   constructor({
     epsilon = 0.0,
     tol = 0.0001,
@@ -23,17 +26,16 @@ class LinearSVR extends Base {
     };
   }
   
-  fit(X, y) {
+  fit(X: FeaturesArray, y: LabelsArray) {
     this.model.train(X, y);
+    return this;
   }
 
-  predict(X) {
+  predict(X: FeaturesArray): LabelsArray {
     return this.model.predict(X);
   }
 
   // Returns the coefficient of determination R^2 of the prediction.
-  __score(X, y) {
+  __score(X: FeaturesArray, y: LabelsArray) {
   }
 }
-
-module.exports = LinearSVR;

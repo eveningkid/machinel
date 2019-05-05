@@ -1,8 +1,11 @@
-const SVM = require('libsvm-js/asm');
-const Base = require('../base');
-const { accuracyScore } = require('../metrics');
+import SVM from 'libsvm-js/asm';
+import Base from '../base';
+import { accuracyScore } from '../metrics';
+import { FeaturesArray, LabelsArray } from '../types';
 
-class NuSVR extends Base {
+export default class NuSVR extends Base {
+  model: any;
+  
   constructor({
     nu = 0.5,
     C = 1.0,
@@ -31,22 +34,21 @@ class NuSVR extends Base {
     };
   }
   
-  fit(X, y) {
+  fit(X: FeaturesArray, y: LabelsArray) {
     this.model.train(X, y);
+    return this;
   }
 
-  predict(X) {
+  predict(X: FeaturesArray): LabelsArray {
     return this.model.predict(X);
   }
 
-  score(X, y) {
+  score(X: FeaturesArray, y: LabelsArray): number {
     return accuracyScore(this.predict(X), y);
   }
 
   // TODO
   // Returns the coefficient of determination R^2 of the prediction.
-  __score(X, y) {
+  __score(X: FeaturesArray, y: LabelsArray) {
   }
 }
-
-module.exports = NuSVR;

@@ -1,8 +1,11 @@
-const SVM = require('libsvm-js/asm');
-const Base = require('../base');
-const { accuracyScore } = require('../metrics');
+import SVM from 'libsvm-js/asm';
+import Base from '../base';
+import { accuracyScore } from '../metrics';
+import { FeaturesArray, LabelsArray } from '../types';
 
-class LinearSVC extends Base {
+export default class LinearSVC extends Base {
+  model: any;
+  
   constructor({
     tol = 0.0001,
     C = 1.0,
@@ -21,22 +24,23 @@ class LinearSVC extends Base {
   }
 
   // TODO
-  __decisionFunction(X) {
+  __decisionFunction(X: FeaturesArray) {
   }
   
   // TODO
   __densify() {
   }	
   
-  fit(X, y) {
+  fit(X: FeaturesArray, y: LabelsArray) {
     this.model.train(X, y);
+    return this;
   }
 
-  predict(X) {
+  predict(X: FeaturesArray): LabelsArray {
     return this.model.predict(X);
   }
 
-  score(X, y) {
+  score(X: FeaturesArray, y: LabelsArray): number {
     return accuracyScore(this.predict(X), y);
   }
   
@@ -44,5 +48,3 @@ class LinearSVC extends Base {
   __sparsify() {
   }
 }
-
-module.exports = LinearSVC;
